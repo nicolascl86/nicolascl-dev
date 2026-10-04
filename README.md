@@ -34,4 +34,13 @@ Then visit <http://localhost:8000>. Stop the server with `Ctrl+C`.
 
 ## Deployment
 
-Upload `index.html`, `styles.css`, and `script.js` together to a static web host. No server-side application is needed.
+Firebase Hosting serves the `public/` folder, as configured in `firebase.json`. The default Firebase project is set in `.firebaserc`.
+
+After editing the root homepage files, copy them into `public/` before deploying:
+
+```sh
+cp index.html styles.css script.js public/
+firebase deploy --only hosting
+```
+
+Deployment requires the Firebase CLI and access to the configured project. Track the hosting configuration and `public/` files in Git; generated `.firebase/` cache files and Firebase debug logs are ignored.

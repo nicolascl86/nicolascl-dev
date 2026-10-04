@@ -1,2 +1,4 @@
 .DS_Store
 homepage.zip
+.firebase/
+firebase-debug.log*
