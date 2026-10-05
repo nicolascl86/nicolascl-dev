@@ -36,14 +36,38 @@ Then visit <http://localhost:8000>. Stop the server with `Ctrl+C`.
 
 Firebase Hosting serves the `public/` folder, as configured in `firebase.json`. The default Firebase project is set in `.firebaserc`.
 
-After editing the root homepage files, copy them into `public/` before deploying:
+Automatic deployment is configured in `.github/workflows/` once the setup PR
+is merged into `main`:
 
-```sh
-cp index.html styles.css script.js public/
-firebase deploy --only hosting
-```
+- `firebase-hosting-merge.yml` deploys the full `public/` folder to the live site
+  on pushes to `main`, including PR merges.
+- `firebase-hosting-pull-request.yml` creates preview deployments for pull
+  requests from branches in this repository. Fork PRs are excluded.
+- No build is required; the generated build step only prints a message.
+- Both workflows reference the GitHub Actions repository secret
+  `FIREBASE_SERVICE_ACCOUNT_NICOLASCL_DEV_WEBSITE`, created by the user's
+  successful Firebase CLI setup. Its presence and validity have not been
+  independently verified; credentials must never be committed.
 
-Deployment requires the Firebase CLI and access to the configured project. Track the hosting configuration and `public/` files in Git; generated `.firebase/` cache files and Firebase debug logs are ignored.
+Keep each root HTML/CSS/JavaScript file synchronized with its `public/` copy
+before committing. GitHub Actions reads `firebase.json`, which selects `public/`
+and the project `nicolascl-dev-website` from the workflows.
+
+Initialization alone does not deploy. Merging the setup PR should deploy all
+current main content, including the already-merged Lab page. Confirm success in
+GitHub Actions before treating the live site as updated. Manual deployment remains
+available using `firebase deploy --only hosting` with authorized Firebase access.
+
+### Deployment setup verification — 5 October 2026
+
+- Generated workflows inspected for main-push live deployment, same-repository
+  PR previews, matching project ID and service-account secret references.
+- Hosting configuration preserved; root/public website copies remain identical.
+- Workflow YAML parsed and deployment trigger/configuration assertions passed.
+- User reported visually verifying the Lab page and merging its PR into main.
+  This is user-confirmed visual verification, not an automated browser test.
+- No deployment run or credential validity was verified during setup preparation.
+  The setup workflows must first be merged into main.
 
 ## Lab page
 
