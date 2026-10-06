@@ -107,3 +107,16 @@ and contains no checked-in GitHub Actions deployment workflow.
 - Category/project content and page-specific JavaScript are unchanged; the
   isolated interaction checks recorded above still apply. Browser rendering
   remains unverified due to the previously recorded security restriction.
+
+### Portfolio project pages — 6 October 2026
+
+Explore the Lab now links to `thelab.html#selected-projects`. Four responsive
+project cards link to individual static HTML pages with overviews, focus areas,
+return links and next-project navigation. The first three pages use introductory
+copy pending detailed project documentation; no outcomes or metrics are claimed.
+Content and navigation work without JavaScript.
+
+Root and public copies use identical content. In-memory checks verify local
+page/asset destinations, section fragments and copy consistency.
+Browser rendering and Firebase preview deployment have not been verified.
+This revision supersedes the earlier description of opening the Lab without a fragment.
