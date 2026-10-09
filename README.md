@@ -36,27 +36,20 @@ Then visit <http://localhost:8000>. Stop the server with `Ctrl+C`.
 
 Firebase Hosting serves the `public/` folder, as configured in `firebase.json`. The default Firebase project is set in `.firebaserc`.
 
-Automatic deployment is configured in `.github/workflows/` once the setup PR
-is merged into `main`:
+Deployment workflows now use **manual `workflow_dispatch` triggers**. Opening a
+PR or pushing to `main` does not automatically deploy once these workflow changes
+are merged. Existing remote workflows still apply until then: do not open a PR
+without approval for its possible preview deployment.
 
-- `firebase-hosting-merge.yml` deploys the full `public/` folder to the live site
-  on pushes to `main`, including PR merges.
-- `firebase-hosting-pull-request.yml` creates preview deployments for pull
-  requests from branches in this repository. Fork PRs are excluded.
-- No build is required; the generated build step only prints a message.
-- Both workflows reference the GitHub Actions repository secret
-  `FIREBASE_SERVICE_ACCOUNT_NICOLASCL_DEV_WEBSITE`, created by the user's
-  successful Firebase CLI setup. Its presence and validity have not been
-  independently verified; credentials must never be committed.
+After explicit deployment approval, select the reviewed branch in the preview
+workflow, or select `main` in the production workflow. Production rejects other
+branches. The preview uses the `behind-the-code-review` Hosting channel.
+These workflows deploy Hosting only; they do not deploy future rules or functions.
 
-Keep each root HTML/CSS/JavaScript file synchronized with its `public/` copy
-before committing. GitHub Actions reads `firebase.json`, which selects `public/`
-and the project `nicolascl-dev-website` from the workflows.
-
-Initialization alone does not deploy. Merging the setup PR should deploy all
-current main content, including the already-merged Lab page. Confirm success in
-GitHub Actions before treating the live site as updated. Manual deployment remains
-available using `firebase deploy --only hosting` with authorized Firebase access.
+Both reference the existing GitHub secret
+`FIREBASE_SERVICE_ACCOUNT_NICOLASCL_DEV_WEBSITE`. Its validity is unverified.
+Never commit credentials. Root website files must match their `public/` copies.
+Manual CLI deployment also requires explicit approval.
 
 ### Deployment setup verification — 5 October 2026
 
@@ -120,3 +113,41 @@ Root and public copies use identical content. In-memory checks verify local
 page/asset destinations, section fragments and copy consistency.
 Browser rendering and Firebase preview deployment have not been verified.
 This revision supersedes the earlier description of opening the Lab without a fragment.
+
+## Behind the Code — Phase 2
+
+The public landing and request-form preview live in `behind-the-code/`, with
+identical Hosting copies in `public/behind-the-code/`. A targeted Hosting rewrite
+serves `/behind-the-code`; unrelated page routes are preserved. Use absolute
+asset paths so both trailing-slash variants work.
+
+Serve the actual Hosting directory for local review:
+
+```sh
+python3 -m http.server 8000 --directory public
+```
+
+Visit <http://localhost:8000/behind-the-code/>. Python redirects the slashless
+path; Firebase uses the configured rewrite.
+
+This phase has no Firebase SDK, backend, account creation, or private content.
+Sign-in, redemption, and request submission are disabled. The submit handler
+also prevents accidental form navigation and never reports a successful request.
+No form data is sent or persisted; only theme preference uses local storage.
+Native required/email/length constraints prepare the form for Phase 3; backend
+validation, App Check, throttling, and Firestore Rules remain required before
+submissions can open. The hidden honeypot is only one future abuse signal.
+
+The new section shares the portfolio layout, adds scoped purple/burgundy accents
+and local serif headings, supports theme preference and reduced motion, and
+includes a skip link and focus-aware section navigation. Existing portfolio
+JavaScript remains unchanged.
+
+Next review gate: approve Phase 2 before Phase 3 authentication and backend work.
+No new services or billing changes were introduced.
+
+Phase 2 verification: JavaScript syntax checks, HTML ID/asset/anchor checks,
+root/public byte consistency, targeted Hosting-route assertions, manual workflow
+trigger assertions, and Git whitespace checks passed. Browser rendering,
+keyboard interaction, and responsive overflow remain unverified because
+Playwright has no installed Chromium executable in this environment.
