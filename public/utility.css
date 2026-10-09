@@ -1,0 +1,10 @@
+.utility main { padding: clamp(48px, 9vw, 100px) 0; max-width: 760px; }
+.utility h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); }
+.utility p, .utility li { line-height: 1.8; }
+.utility .actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+.utility .actions a { padding: 12px 20px; border: 1px solid var(--line); border-radius: 6px; }
+.utility .actions a:first-child { color: #fff; background: #68304a; border-color: #68304a; }
+.utility h2 { margin-top: 36px; font-size: 1.35rem; }
+.utility .eyebrow { color: #694180; }
+:root[data-theme="dark"] .utility .eyebrow { color: #d0afe5; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) { color-scheme: dark; --ink: #e3e7df; --muted: #b2bcb4; --accent: #a8c9b6; --line: #46534b; --paper: #202825; } :root:not([data-theme]) .utility .eyebrow { color: #d0afe5; } }
