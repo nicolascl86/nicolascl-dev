@@ -1,4 +1,4 @@
-@import url("styles.css");
+@import url("styles.css?v=e25e3fd1484f");
 .area-link { display:block; height:100%; text-decoration:none; color:var(--ink); padding:20px; border:1px solid var(--line); border-radius:12px; }
 .area-link:hover { border-color:var(--accent-text); background:var(--soft); }
 /* Portfolio cards and detail pages */
@@ -9,7 +9,7 @@
 .project-card { display: flex; flex-direction: column; height: 100%; padding: clamp(24px, 4vw, 36px); border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; background: var(--surface); }
 .project-card:hover { border-color: var(--accent-text); background: var(--soft); }
 .card-meta { color: var(--muted); font-size: .8125rem; line-height: 1.6; }
-.project-card h3 { margin: 20px 0 12px; font-size: clamp(1.375rem,3vw,1.75rem); font-weight: 500; line-height: 1.3; letter-spacing: -.025em; }
+.project-card h3 { margin: 20px 0 12px; font-size: clamp(1.375rem,3vw,1.75rem); font-weight: 600; line-height: 1.3; letter-spacing: -.025em; }
 .project-card p { margin: 0 0 28px; color: var(--muted); line-height: 1.75; }
 .card-action { margin-top: auto; color: var(--accent-text); font-size: .875rem; }
 .project-detail .hero { padding-bottom: 64px; }
@@ -47,7 +47,7 @@ button:disabled { cursor:progress; opacity:.7; }
 .stage-heading p { color:var(--muted); line-height:1.8; max-width:680px; margin:0 0 28px; }
 .sample-articles { list-style:none; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:0; padding:0; }
 .sample-articles li { display:flex; flex-direction:column; gap:10px; padding:20px; border:1px solid var(--line); border-radius:10px; }
-.sample-articles strong { font-size:.9375rem; font-weight:550; line-height:1.6; }
+.sample-articles strong { font-size:.9375rem; font-weight:500; line-height:1.6; }
 .sample-articles li>span:last-child { color:var(--muted); font-size:.8125rem; line-height:1.7; }
 .source-label { color:var(--accent-text); font-size:.6875rem; text-transform:uppercase; letter-spacing:.06em; }
 .sample-stats { display:flex; flex-wrap:wrap; gap:20px; padding:24px 0; }
@@ -62,3 +62,5 @@ button:disabled { cursor:progress; opacity:.7; }
 .digest-preview li span { display:block; color:var(--muted); font-size:.75rem; }
 .digest-preview>p { margin:20px 0 0; padding-top:16px; border-top:1px solid var(--line); font-size:.8125rem; line-height:1.7; color:var(--muted); }
 @media(max-width:600px) { .workflow-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } .workflow-step { padding:16px; } .workflow-step[aria-current="step"] { padding:15px; } .sample-articles { grid-template-columns:1fr; } .digest-preview { padding:20px; } }
+
+.project-card h3,.stage-heading h3,.digest-preview h4 { font-family:var(--font-heading); font-weight:600; }
