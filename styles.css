@@ -64,3 +64,12 @@ footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px 3
 }
 @media(max-width:760px) { .projects { grid-template-columns:1fr; gap:16px; } .hero { padding:64px 0; } .section { padding:32px 0 48px; } .work-top { margin-bottom:24px; } }
 @media(max-width:480px) { header { gap:12px; padding:20px 0; } .domain { font-size:.75rem; } .theme-toggle { font-size:.75rem; } .hero { padding:48px 0; } .preview-heading { padding:16px; font-size:.6rem; } .preview-label { display:none; } .preview-flow { flex-direction:column; align-items:stretch; padding:24px; } .flow-arrow { transform:rotate(90deg); align-self:center; } .preview-result { padding:16px; } .hero-preview { margin-top:32px; } .back-to-top { bottom:12px; right:12px; } }
+
+/* The original Adobe elephant is a local, transparent brand asset. */
+.mark { display:inline-flex; align-items:center; justify-content:center; min-width:56px; min-height:63px; flex-shrink:0; border-radius:8px; }
+.mark img { display:block; width:56px; height:63px; object-fit:contain; }
+.hero-identity { display:flex; justify-content:space-between; align-items:center; gap:40px; }
+.hero-elephant { display:block; width:220px; height:246px; object-fit:contain; flex-shrink:0; margin-right:32px; }
+@media(max-width:1000px) { .hero-elephant { width:160px; height:179px; margin-right:0; } }
+@media(max-width:760px) { .hero-elephant { display:none; } .hero-identity { display:block; } }
+@media(max-width:480px) { .mark { min-width:44px; min-height:50px; } .mark img { width:44px; height:50px; } }

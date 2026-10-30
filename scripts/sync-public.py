@@ -16,6 +16,17 @@ for pattern in ('*.html', '*.css', '*.js'):
                 mismatches.append(source.name)
         else:
             shutil.copy2(source, target)
+# Brand assets are canonical in assets/, with generated hosting copies.
+for source in sorted((root / 'assets').rglob('*')):
+    if not source.is_file():
+        continue
+    target = root / 'public' / source.relative_to(root)
+    if args.check:
+        if not target.exists() or source.read_bytes() != target.read_bytes():
+            mismatches.append(str(source.relative_to(root)))
+    else:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
 if mismatches:
     parser.exit(1, 'Outdated public/ copies: ' + ', '.join(mismatches) + '\nRun python3 scripts/sync-public.py\n')
 print('Hosting copies match.' if args.check else 'Firebase public/ copies updated.')
