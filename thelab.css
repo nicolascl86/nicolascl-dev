@@ -1,4 +1,4 @@
-@import url("styles.css?v=6acc71d4cfc2");
+@import url("styles.css?v=a63eb3deb4ee");
 .area-link { display:block; height:100%; text-decoration:none; color:var(--ink); padding:20px; border:1px solid var(--line); border-radius:12px; }
 .area-link:hover { border-color:var(--accent-text); background:var(--soft); }
 /* Portfolio cards and detail pages */
