@@ -5,7 +5,7 @@ Nicolas Kleovoulou’s portfolio across operations, digital transformation, AI a
 ## Experience
 
 - Purple (`#804bf2`) and grey (`#646366`) identity, with light and dark surfaces.
-- The user’s side-profile origami elephant reference, recoloured in the brand palette, used as the linked header mark, desktop hero illustration and browser favicon.
+- The user’s side-profile origami elephant reference, recoloured in the brand palette, used as the linked header mark and browser favicon.
 - Shared theme control on all six content pages. Follows the system preference until a choice is saved; existing theme preferences are retained.
 - Clickable homepage work cards and a direct route to the workflow demo.
 - Interactive n8n news workflow simulation: collect four fictional articles, remove one duplicate, inspect three prepared summaries, and build a sample digest.
@@ -52,7 +52,7 @@ Chromium checks cover all six content pages at desktop and 320, 390 and 768-pixe
 
 `assets/elephant-logo.png` is the transparent logo (512 × 366). `assets/favicon.png` is the square 64 × 64 padded version exported with Adobe. The logo was adapted from the user-supplied side-profile elephant reference, preserving its lowered trunk, angular folds, tusk and right-facing pose while moving the paper into the site’s purple palette. Image generation performed the recolour/cutout; Adobe prepared the crop and small exports. The facets retain tonal variation; this is artwork rather than a flat two-colour vector.
 
-These files are bundled locally and copied to `public/assets/` by the sync script. Visitors do not request Adobe URLs, and the implementation does not rely on expiring links. All six content pages link the logo to the homepage with an accessible name. The larger hero illustration is decorative and hidden on small screens, where the header retains the logo.
+These files are bundled locally and copied to `public/assets/` by the sync script. Visitors do not request Adobe URLs, and the implementation does not rely on expiring links. All six content pages link the logo to the homepage with an accessible name. The main homepage content has no elephant illustration; branding is limited to the top-left header logo and browser favicon.
 
 Verification: Chromium confirmed transparent logo pixels, successful image loading, favicon references and no horizontal overflow on six pages at 320/390/768/1440px widths. Header keyboard navigation passed; desktop light/dark and mobile screenshots were inspected. Local assets, fragments, hosting-copy consistency and Git whitespace checks passed.
 
@@ -62,7 +62,7 @@ All six content pages embed the published Adobe Fonts web project `dea3jlm`, cre
 
 Dark mode uses softer grey-lavender text: primary `#cdc8d3`, supporting `#aaa4b1` and links `#b398e8`. Purple buttons use `#f8f3ff` labels. These combinations retain at least 4.5:1 contrast against their respective surfaces.
 
-The supplied live screenshot’s stacked elephant was reproduced locally by serving current HTML with the stylesheet from before the logo release. That supports stale CSS as the explanation; the deployed response and browser cache could not be inspected from this environment. The hero now uses an explicit two-column grid above 760px, and hides only the decorative hero copy below that width. The header elephant remains visible. Local CSS/JS/image URLs are content-versioned on every sync, including CSS imports, and Firebase HTML responses are configured to revalidate.
+The supplied live screenshot’s stacked elephant was reproduced locally by serving current HTML with the stylesheet from before the logo release. That supports stale CSS as the explanation; the deployed response and browser cache could not be inspected from this environment. The decorative hero elephant was subsequently removed at the owner’s request. The header elephant remains visible at every viewport width. Local CSS/JS/image URLs are content-versioned on every sync, including CSS imports, and Firebase HTML responses are configured to revalidate.
 
 Run `python3 -m unittest discover -s tests` for the versioning regression check. It verifies that shared CSS edits invalidate the nested import and HTML references, sync is idempotent, external Adobe URLs remain untouched, image replacements invalidate their URLs, and stale hosting copies fail verification. Both deployment workflows run this check.
 
