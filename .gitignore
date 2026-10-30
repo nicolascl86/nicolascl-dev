@@ -2,3 +2,5 @@
 homepage.zip
 .firebase/
 firebase-debug.log*
+
+__pycache__/
