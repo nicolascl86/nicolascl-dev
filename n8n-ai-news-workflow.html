@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>n8n AI News Workflow — Nicolas Kleovoulou</title>
   <meta name="description" content="Exploring an automated workflow for gathering and organising AI news. A project by Nicolas Kleovoulou.">
-  <meta name="theme-color" content="#deded5">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233a4542'/%3E%3Cpath d='M9 24V8l14 16V8' fill='none' stroke='%23deded5' stroke-width='3'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#F8F7FA">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23804bf2'/%3E%3Cpath d='M9 24V8l14 16V8' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="thelab.css">
+  <script src="script.js" defer></script>
   <script src="thelab.js" defer></script>
+  <script src="workflow-demo.js" defer></script>
 </head>
 <body class="project-detail">
   <div class="page">
@@ -19,19 +21,51 @@
         <p class="eyebrow">Automation</p>
         <h1 id="project-title">n8n AI News Workflow</h1>
         <p class="intro">Exploring an automated workflow for gathering and organising AI news.</p>
-        <div class="project-meta"><span>2026</span><span>Project overview</span></div>
+        <div class="project-meta"><span>2026</span><span>Concept &amp; interactive prototype</span></div>
       </section>
       <section class="section detail-copy" aria-labelledby="overview-title">
         <h2 class="section-title" id="overview-title">OVERVIEW</h2>
         <p>An automation experiment centred on n8n and AI news. The project explores how connected tools and APIs can turn incoming information into a more manageable reading workflow.</p>
-        <p>Detailed process notes, examples and results will be added as this project is documented.</p>
+        <p>The prototype below makes that idea tangible: four incoming articles become three unique stories and one reviewable digest. It illustrates a possible workflow, rather than a deployed n8n integration or measured project outcome.</p>
       </section>
+      <section class="section workflow-demo" id="workflow-demo" aria-labelledby="demo-title" tabindex="-1">
+        <div class="demo-heading"><h2 class="section-title" id="demo-title">FROM NEWS FEED TO READING LIST</h2><span class="demo-badge">Interactive simulation</span></div>
+        <p class="demo-intro">Follow a small batch of fictional articles through a proposed news workflow. Inspect any step, or run the full sample to see the digest take shape.</p>
+        <p class="demo-note">Prepared example data. No live feeds, AI requests, or external services are used.</p>
+        <div class="demo-controls" hidden><button class="button primary" id="run-workflow" type="button">Run sample <span aria-hidden="true">→</span></button><button class="button" id="reset-workflow" type="button">Reset</button><span class="demo-status" id="workflow-status" role="status" aria-live="polite" aria-atomic="true">Ready to explore.</span></div>
+        <ol class="workflow-steps">
+          <li><a href="#stage-collect" class="workflow-step" data-stage="0"><span class="step-number">01</span><strong>Collect</strong><span>4 incoming articles</span></a></li>
+          <li><a href="#stage-deduplicate" class="workflow-step" data-stage="1"><span class="step-number">02</span><strong>Deduplicate</strong><span>3 unique stories</span></a></li>
+          <li><a href="#stage-summarise" class="workflow-step" data-stage="2"><span class="step-number">03</span><strong>Summarise</strong><span>3 concise takeaways</span></a></li>
+          <li><a href="#stage-digest" class="workflow-step" data-stage="3"><span class="step-number">04</span><strong>Build digest</strong><span>1 reading list</span></a></li>
+        </ol>
+        <div class="stage-panels">
+          <section class="stage-panel" id="stage-collect" aria-labelledby="collect-title" tabindex="-1">
+            <div class="stage-heading"><span class="card-meta">STEP 01 / INPUT</span><h3 id="collect-title">Gather the signals</h3><p>Collect articles from different feeds into a consistent format. This sample includes the same story from two sources.</p></div>
+            <ul class="sample-articles"><li><span class="source-label">Workplace Weekly</span><strong>AI meeting notes still need a human check</strong><span>Workplace AI · Story A</span></li><li><span class="source-label">Automation Journal</span><strong>Small teams connect tools with workflow automation</strong><span>Automation · Story B</span></li><li><span class="source-label">Tech Roundup</span><strong>AI meeting notes still need a human check</strong><span>Workplace AI · Story A · Duplicate</span></li><li><span class="source-label">Operations Review</span><strong>Clear handoffs improve procurement processes</strong><span>Operations · Story C</span></li></ul>
+          </section>
+          <section class="stage-panel" id="stage-deduplicate" aria-labelledby="deduplicate-title" tabindex="-1">
+            <div class="stage-heading"><span class="card-meta">STEP 02 / CLEAN UP</span><h3 id="deduplicate-title">Keep each story once</h3><p>Compare story identifiers and retain one copy of each article. A real workflow could compare canonical URLs and check near-duplicate headlines.</p></div>
+            <div class="sample-stats"><span><strong>4</strong> incoming</span><span><strong>−1</strong> duplicate</span><span><strong>3</strong> unique stories</span></div><p class="removed-item">Removed: Tech Roundup’s second copy of Story A.</p>
+          </section>
+          <section class="stage-panel" id="stage-summarise" aria-labelledby="summarise-title" tabindex="-1">
+            <div class="stage-heading"><span class="card-meta">STEP 03 / MAKE IT USEFUL</span><h3 id="summarise-title">Extract the takeaway</h3><p>Turn each story into a short, practical summary. These examples are prewritten; a connected AI step would need checks for accuracy and source fidelity.</p></div>
+            <ul class="sample-articles summaries"><li><span class="source-label">Workplace AI</span><strong>Keep human review in the loop.</strong><span>Check meeting summaries against the original notes before sharing actions.</span></li><li><span class="source-label">Automation</span><strong>Start with a repeatable task.</strong><span>Connect existing tools around one clear handoff before expanding a workflow.</span></li><li><span class="source-label">Operations</span><strong>Define who owns the next step.</strong><span>Make procurement responsibilities and approval handoffs explicit.</span></li></ul>
+          </section>
+          <section class="stage-panel" id="stage-digest" aria-labelledby="digest-title" tabindex="-1">
+            <div class="stage-heading"><span class="card-meta">STEP 04 / OUTPUT</span><h3 id="digest-title">Less noise. A useful reading list.</h3><p>Combine the unique stories into one digest, ready for a person to review before sharing.</p></div>
+            <div class="digest-preview"><div class="digest-heading"><span class="demo-badge">Sample digest</span><span>3 stories · Prepared example</span></div><h4>Your AI &amp; operations briefing</h4><ol><li><strong>Workplace AI</strong> — Review AI-generated meeting actions before sharing.<span>Source: Workplace Weekly · Story A</span></li><li><strong>Automation</strong> — Begin with one repeatable handoff between tools.<span>Source: Automation Journal · Story B</span></li><li><strong>Operations</strong> — Give every procurement handoff a clear owner.<span>Source: Operations Review · Story C</span></li></ol><p>Review checkpoint: verify each summary against its source.</p></div>
+          </section>
+        </div>
+        <noscript><p class="demo-note">The complete example is shown above. Enable JavaScript to run the step-by-step simulation.</p></noscript>
+      </section>
+
       <section class="section detail-copy" aria-labelledby="focus-title">
-        <h2 class="section-title" id="focus-title">PROJECT FOCUS</h2>
+        <h2 class="section-title" id="focus-title">WHAT TO VALIDATE NEXT</h2>
         <ul>
-          <li>Connecting information sources through workflows and APIs.</li>
-          <li>Organising relevant items into a useful reading format.</li>
-          <li>Exploring where AI assistance fits within an automated workflow.</li>
+          <li>Choose suitable feeds and retain source links through each step.</li>
+          <li>Check duplicate detection against real articles and overlapping coverage.</li>
+          <li>Evaluate summary accuracy and usefulness before connecting a delivery channel.</li>
         </ul>
       </section>
       <nav class="project-navigation" aria-label="Project navigation">
