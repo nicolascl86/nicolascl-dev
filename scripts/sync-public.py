@@ -11,6 +11,7 @@ args = parser.parse_args()
 root = Path(__file__).resolve().parent.parent
 sources = sorted(p for pattern in ('*.html', '*.css', '*.js') for p in root.glob(pattern))
 contents = {p.name: p.read_bytes() for p in sources}
+contents.update({str(p.relative_to(root)): p.read_bytes() for p in (root / "assets").rglob("*.png")})
 mismatches = []
 
 def versioned(name):
@@ -29,7 +30,7 @@ for p in sources:
     if p.suffix == '.html':
         text = data.decode('utf-8')
         # Local references only. Adobe manages its own stylesheet caching.
-        text = re.sub(r'((?:href|src)=")([^"/:?]+\.(?:css|js))(?:\?v=[a-f0-9]+)?(")',
+        text = re.sub(r'((?:href|src)=")([^":?]+\.(?:css|js|png))(?:\?v=[^"]+)?(")',
                       lambda m: m[1] + versioned(m[2]) + m[3], text)
         data = text.encode('utf-8')
     target = root / 'public' / p.name

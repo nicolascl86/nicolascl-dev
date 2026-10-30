@@ -19,9 +19,9 @@ class AssetVersions(unittest.TestCase):
             (root / 'styles.css').write_text('body { color: #cdc8d3; }\n')
             (root / 'thelab.css').write_text('@import url("styles.css");\n')
             (root / 'script.js').write_text('/* shared UI */\n')
-            page = '<link href="https://use.typekit.net/dea3jlm.css"><link href="thelab.css"><script src="script.js"></script>'
+            page = '<img src="assets/logo.png"><link href="https://use.typekit.net/dea3jlm.css"><link href="thelab.css"><script src="script.js"></script>'
             (root / 'index.html').write_text(page)
-            (root / 'assets' / 'logo.txt').write_text('brand asset fixture')
+            (root / 'assets' / 'logo.png').write_bytes(b'brand asset fixture')
             command = [sys.executable, str(root / 'scripts' / SCRIPT.name)]
             def run(*args):
                 return subprocess.run(command + list(args), capture_output=True)
@@ -31,9 +31,10 @@ class AssetVersions(unittest.TestCase):
             imported = (root / 'thelab.css').read_text()
             self.assertIn('thelab.css?v=', before)
             self.assertIn('script.js?v=', before)
+            self.assertIn('assets/logo.png?v=', before)
             self.assertIn('styles.css?v=', imported)
             self.assertIn('href="https://use.typekit.net/dea3jlm.css"', before)
-            self.assertEqual((root / 'assets' / 'logo.txt').read_bytes(), (root / 'public' / 'assets' / 'logo.txt').read_bytes())
+            self.assertEqual((root / 'assets' / 'logo.png').read_bytes(), (root / 'public' / 'assets' / 'logo.png').read_bytes())
             # A shared CSS edit must invalidate both the nested import and HTML.
             (root / 'styles.css').write_text('body { color: #aaa4b1; }\n')
             self.assertNotEqual(run('--check').returncode, 0)
@@ -44,6 +45,11 @@ class AssetVersions(unittest.TestCase):
             after = (root / 'index.html').read_bytes()
             self.assertEqual(run().returncode, 0)
             self.assertEqual(after, (root / 'index.html').read_bytes(), 'sync must be idempotent')
+            # Replacing artwork must also invalidate cached image URLs.
+            (root / 'assets' / 'logo.png').write_bytes(b'updated brand asset')
+            self.assertNotEqual(run('--check').returncode, 0)
+            self.assertEqual(run().returncode, 0)
+            self.assertNotEqual(after, (root / 'index.html').read_bytes())
             # CI catches a stale deployed copy even with correct source versions.
             (root / 'public' / 'thelab.css').write_text(imported)
             self.assertNotEqual(run('--check').returncode, 0)
