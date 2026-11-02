@@ -67,3 +67,11 @@ The supplied live screenshot’s stacked elephant was reproduced locally by serv
 Run `python3 -m unittest discover -s tests` for the versioning regression check. It verifies that shared CSS edits invalidate the nested import and HTML references, sync is idempotent, external Adobe URLs remain untouched, image replacements invalidate their URLs, and stale hosting copies fail verification. Both deployment workflows run this check.
 
 Browser validation covered all six pages at 320/390/760/761/900/1024/1440/1978px, desktop elephant alignment, mobile visibility, soft text colours, and blocked-font/no-JavaScript fallbacks. The Adobe web project was successfully published, but external font downloads were unavailable here, so local screenshots use fallback fonts; actual Adobe font delivery should be confirmed in the Firebase preview.
+
+## DevFest Cyprus 2026 case study (Issue #8)
+
+`devfest-cyprus-2026.html` uses the existing Lab detail layout and shared theme/navigation scripts. Its card lives in `thelab.html`; Firebase rewrites `/projects` and `/projects/` to that existing listing. Local Python preview uses `/thelab.html` (it does not apply Firebase rewrites).
+
+The page records the supplied Camera Operator 2 assignment, not confirmed footage or final outcomes. Post-event reflections/results and approved landscape/portrait media remain pending. The two SVGs are original local placeholders, not event imagery. Replace them only with publication-approved media, preserve descriptive alt text and intrinsic dimensions, and use lazy loading for images (or controls and `preload="none"` for video). Do not embed private recordings or notes. Run the sync script after source edits.
+
+Issue #8 validation: existing Python unittest suite, asset sync `--check`, local HTML asset/page link validation, JavaScript syntax and `git diff --check` passed. Chromium verified the listing and detail at 320/390/768/1440px with no horizontal overflow, loaded gallery artwork, card navigation, persisted theme and no-JavaScript rendering. Adobe Fonts were blocked for fallback validation. Firebase rewrites were inspected in configuration; no Firebase emulator or deployment was run. There is no application build or lint command in this dependency-free repository.
