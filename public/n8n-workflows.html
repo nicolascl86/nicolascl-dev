@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>n8n Workflows — Nicolas Kleovoulou</title>
+  <meta name="description" content="Three personal n8n automations: Cyprus Brief and AI and Automation Brief deliver five articles each day to Telegram; expense-tracker logs Telegram expenses to Google Sheets.">
+  <link rel="canonical" href="https://nicolascl.dev/n8n-workflows.html">
+  <meta property="og:title" content="n8n Workflows — Nicolas Kleovoulou">
+  <meta property="og:description" content="Daily news briefs and expense tracking, connected through n8n, Telegram and Google Sheets.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://nicolascl.dev/n8n-workflows.html">
+  <meta name="theme-color" content="#F8F7FA">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png?v=3adf5ef5958f">
+  <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/dea3jlm.css">
+  <link rel="stylesheet" href="thelab.css?v=d9264b78c2a5">
+  <script src="script.js?v=ecbf58b21ccb" defer></script>
+  <script src="thelab.js?v=cd65be9cd40b" defer></script>
+</head>
+<body class="project-detail">
+  <div class="page">
+    <header><a class="mark" href="index.html" aria-label="Nicolas Kleovoulou — homepage"><img src="assets/elephant-logo.png?v=dfb5c6d821b9" width="72" height="51" alt="Purple and grey origami elephant"></a><span class="domain">nicolascl.dev</span></header>
+    <main>
+      <section class="hero" aria-labelledby="project-title">
+        <a href="thelab.html#selected-projects">← All projects</a>
+        <p class="eyebrow">Personal automation</p>
+        <h1 id="project-title">n8n Workflows</h1>
+        <p class="intro">Daily reading and everyday expenses, connected through n8n. Three workflows that bring useful information and simple confirmations into my Telegram.</p>
+        <div class="project-meta"><span>2026</span><span>n8n · Telegram · Google Sheets</span></div>
+      </section>
+      <section class="section detail-copy" aria-labelledby="overview-title">
+        <h2 class="section-title" id="overview-title">OVERVIEW</h2>
+        <p>I use n8n to connect tools around small, repeatable tasks. Two news briefs deliver articles to my Telegram each day, while an expense tracker turns a message to my bot into a row in Google Sheets.</p>
+        <p>The common thread is a familiar interface: I receive my reading and record expenses in Telegram, with n8n connecting the steps behind the scenes.</p>
+        <ul>
+          <li><a href="#cyprus-brief">Cyprus Brief</a> — five articles daily.</li>
+          <li><a href="#ai-automation-brief">AI and Automation Brief</a> — five articles daily.</li>
+          <li><a href="#expense-tracker">expense-tracker</a> — message, log, confirmation.</li>
+        </ul>
+      </section>
+      <section class="section" id="cyprus-brief" aria-labelledby="cyprus-title" tabindex="-1">
+        <h2 class="section-title" id="cyprus-title">01 / CYPRUS BRIEF</h2>
+        <div class="stage-panel">
+          <div class="stage-heading"><span class="card-meta">Daily news · Telegram delivery</span><h3>A daily window into Cyprus</h3><p>Cyprus Brief sends me five articles each day on Telegram. It gives my Cyprus reading a regular place in the day, delivered to an app I already use.</p></div>
+          <ol class="sample-articles"><li><span class="source-label">01 / Cadence</span><strong>Daily brief</strong><span>The workflow runs daily in n8n.</span></li><li><span class="source-label">02 / Delivery</span><strong>Five articles to Telegram</strong><span>I receive the brief in my Telegram.</span></li></ol>
+        </div>
+      </section>
+      <section class="section" id="ai-automation-brief" aria-labelledby="ai-title" tabindex="-1">
+        <h2 class="section-title" id="ai-title">02 / AI AND AUTOMATION BRIEF</h2>
+        <div class="stage-panel">
+          <div class="stage-heading"><span class="card-meta">Daily news · Telegram delivery</span><h3>Keeping up with AI and automation</h3><p>My AI and Automation Brief sends five articles daily to my Telegram. It brings a second area of interest into the same reading routine.</p></div>
+          <ol class="sample-articles"><li><span class="source-label">01 / Cadence</span><strong>Daily brief</strong><span>A separate n8n workflow for AI and automation reading.</span></li><li><span class="source-label">02 / Delivery</span><strong>Five articles to Telegram</strong><span>A daily set of articles delivered to my Telegram.</span></li></ol>
+        </div>
+      </section>
+      <section class="section" id="expense-tracker" aria-labelledby="expense-title" tabindex="-1">
+        <h2 class="section-title" id="expense-title">03 / EXPENSE-TRACKER</h2>
+        <div class="stage-panel">
+          <div class="stage-heading"><span class="card-meta">Telegram → n8n → Google Sheets → Telegram</span><h3>From a quick message to a recorded expense</h3><p>I text an expense to my Telegram bot. The message goes to n8n, which logs the expense in a Google Sheet and sends me a confirmation on Telegram.</p></div>
+          <ol class="sample-articles">
+            <li><span class="source-label">01 / Capture</span><strong>Text the bot</strong><span>I send an expense through Telegram.</span></li>
+            <li><span class="source-label">02 / Connect</span><strong>Pass it to n8n</strong><span>The workflow receives the expense message.</span></li>
+            <li><span class="source-label">03 / Record</span><strong>Log to Google Sheets</strong><span>n8n adds the expense to my sheet.</span></li>
+            <li><span class="source-label">04 / Confirm</span><strong>Reply in Telegram</strong><span>I receive confirmation after the expense is logged.</span></li>
+          </ol>
+        </div>
+      </section>
+      <section class="section detail-copy" aria-labelledby="approach-title">
+        <h2 class="section-title" id="approach-title">ONE INTERFACE, THREE ROUTINES</h2>
+        <p>These workflows connect daily information delivery and expense capture through Telegram. The briefs bring reading to me; the expense tracker lets me send a quick message and receive confirmation that it has been recorded.</p>
+        <p><a href="n8n-ai-news-workflow.html#workflow-demo">Explore the news workflow simulation →</a></p>
+        <p class="demo-note">The linked simulation uses fictional, prepared data to illustrate a news workflow. It is a separate example from these personal automations.</p>
+      </section>
+      <nav class="project-navigation" aria-label="Project navigation">
+        <a href="thelab.html#selected-projects">← All projects</a>
+        <a href="n8n-ai-news-workflow.html#workflow-demo">Explore: news workflow simulation →</a>
+      </nav>
+    </main>
+    <footer>
+      <span>Nicolas Kleovoulou</span>
+      <div class="footer-links"><a href="https://www.linkedin.com/in/nkleovoulou">LinkedIn</a><a href="https://github.com/nicolascl86">GitHub</a></div>
+      <span>© 2026</span>
+    </footer>
+  </div>
+</body>
+</html>
