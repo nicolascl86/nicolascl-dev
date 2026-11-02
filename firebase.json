@@ -25,6 +25,16 @@
           }
         ]
       }
+    ],
+    "rewrites": [
+      {
+        "source": "/projects",
+        "destination": "/thelab.html"
+      },
+      {
+        "source": "/projects/",
+        "destination": "/thelab.html"
+      }
     ]
   }
 }

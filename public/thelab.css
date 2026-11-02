@@ -64,3 +64,11 @@ button:disabled { cursor:progress; opacity:.7; }
 @media(max-width:600px) { .workflow-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } .workflow-step { padding:16px; } .workflow-step[aria-current="step"] { padding:15px; } .sample-articles { grid-template-columns:1fr; } .digest-preview { padding:20px; } }
 
 .project-card h3,.stage-heading h3,.digest-preview h4 { font-family:var(--font-heading); font-weight:600; }
+
+/* DevFest case study: intrinsic media ratios stay intact on narrow screens. */
+.card-tags { display:block; color:var(--muted); font-size:.8125rem; line-height:1.8; margin:0 0 24px; }
+.devfest-gallery { display:grid; grid-template-columns:minmax(0, 2fr) minmax(0, 1fr); align-items:start; gap:24px; margin-top:28px; }
+.devfest-gallery figure { margin:0; min-width:0; }
+.devfest-gallery img, .devfest-gallery video { display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--line); }
+.devfest-gallery figcaption { margin-top:12px; color:var(--muted); font-size:.875rem; line-height:1.7; }
+@media(max-width:600px) { .devfest-gallery { grid-template-columns:1fr; } .devfest-gallery .portrait-media { width:min(100%, 280px); justify-self:center; } }
