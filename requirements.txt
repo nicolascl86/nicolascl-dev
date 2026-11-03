@@ -1,0 +1,2 @@
+# Python packages used by scripts/build-notes.py (install: pip install -r requirements.txt)
+Markdown==3.10.2

@@ -1,3 +1,15 @@
+// Privacy-friendly page counts (GoatCounter: no cookies, so no consent banner).
+// Only the live domain is counted, never local or Firebase preview builds.
+// To change accounts, edit GOATCOUNTER_CODE (the part before .goatcounter.com).
+(() => {
+  const GOATCOUNTER_CODE = 'nicolascl';
+  if (!GOATCOUNTER_CODE || !['nicolascl.dev', 'www.nicolascl.dev'].includes(location.hostname)) return;
+  const counter = document.createElement('script');
+  counter.async = true;
+  counter.dataset.goatcounter = `https://${GOATCOUNTER_CODE}.goatcounter.com/count`;
+  counter.src = 'https://gc.zgo.at/count.js';
+  document.head.append(counter);
+})();
 // Shared progressive enhancements for every page.
 (() => {
   const root = document.documentElement;

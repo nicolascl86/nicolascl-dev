@@ -1,6 +1,6 @@
 # nicolascl.dev
 
-Nicolas Kleovoulou’s portfolio across operations, digital transformation, AI and automation. Built with plain HTML, CSS and JavaScript; no application dependencies or build step.
+Nicolas Kleovoulou’s portfolio across operations, digital transformation, AI and automation. Built with plain HTML, CSS and JavaScript. The only build step is a small Python script that turns Field Notes posts from Markdown into pages.
 
 ## Experience
 
@@ -25,10 +25,12 @@ Open http://localhost:8000. The homepage is `index.html`; the interactive exampl
 
 Edit the HTML, CSS and JavaScript files at the repository root, and brand files in `assets/`. `styles.css` and `script.js` are shared by every content page. `thelab.css` imports those base styles and adds Lab/project styles; `thelab.js` handles native fragment focus. `workflow-demo.js` is loaded only by the news project.
 
-Firebase serves the generated copies in `public/`. After editing root sources:
+Firebase serves the generated copies in `public/`. After editing root sources or posts:
 
 ```sh
-python3 scripts/sync-public.py
+python3 -m pip install -r requirements.txt   # once
+python3 scripts/build-notes.py               # builds Field Notes, then runs sync-public.py
+python3 scripts/build-notes.py --check
 python3 scripts/sync-public.py --check
 ```
 
@@ -79,3 +81,40 @@ Issue #8 validation: existing Python unittest suite, asset sync `--check`, local
 ## n8n Workflows
 
 `n8n-workflows.html` documents the owner's three personal automations: Cyprus Brief and AI and Automation Brief each send five articles daily to Telegram; expense-tracker receives a Telegram expense, logs it through n8n to Google Sheets, and confirms in Telegram. The page uses the existing static project layout and is linked from the Lab listing and homepage automation card. The previous fictional news simulation remains available and is explicitly distinguished from these workflows. No workflow endpoints, bot credentials or private sheet links are published.
+
+## Field Notes (writing)
+
+Field Notes is the site's writing section, served at `/notes/`. Posts are written in Markdown in `content/notes/`; everything else is generated.
+
+**To publish a note**
+
+1. Create `content/notes/<slug>.md`. The file name becomes the URL: `my-first-erp-lesson.md` → `/notes/my-first-erp-lesson/`. Use lowercase letters, digits and hyphens.
+2. Start it with front matter:
+
+   ```
+   ---
+   title: My first ERP lesson
+   date: 2026-11-10
+   summary: One or two sentences for cards, search results and link previews.
+   tags: [erp, project-management]
+   draft: false
+   ---
+   ```
+
+   `title`, `date` (YYYY-MM-DD) and `summary` are required. `draft: true` keeps a post out of every page, the feed and the sitemap. Optional: `image:` (absolute URL for a post-specific link preview, 1200 × 630) and `slug:` (override the URL).
+3. Run `python3 scripts/build-notes.py`, preview locally, commit and open a PR.
+
+**What the build generates** (all committed, do not edit by hand): `notes/index.html` (listing), `notes/<slug>/index.html` (each post), `feed.xml` (RSS), `sitemap.xml`, and the "Latest field note" card in `index.html` between the `latest-note` markers. Reading time is words ÷ 220, rounded up. Deleting or drafting a post removes its generated pages, including the hosting copy. CI fails if generated files are out of date.
+
+**Tags** are stored on every post and shown as chips. Clickable tag pages are intentionally deferred until there are roughly 8–10 posts.
+
+**Promotion.** Notes pages and the homepage carry Open Graph/Twitter tags (default image `assets/og-default.png`, 1200 × 630), a canonical URL and RSS autodiscovery. Posts include `BlogPosting` structured data and plain share links (LinkedIn, X, email) with no third-party scripts. `robots.txt` points crawlers at `sitemap.xml`.
+
+**Analytics (GoatCounter).** `script.js` loads GoatCounter only on `nicolascl.dev`, never on localhost or Firebase previews. It sets no cookies, so no consent banner is needed. The account code is the `GOATCOUNTER_CODE` constant in `script.js` (currently `nicolascl`):
+
+1. Sign up at https://www.goatcounter.com with the code `nicolascl` (if taken, choose another and update `GOATCOUNTER_CODE`).
+2. Merge and deploy, then visit the live site; the visit appears in the dashboard.
+
+**Search Console.** Add `nicolascl.dev` as a Domain property at https://search.google.com/search-console, verify it with the DNS TXT record Google provides at your domain registrar, then submit `https://nicolascl.dev/sitemap.xml`.
+
+Local preview serves posts at `http://localhost:8000/notes/`. Notes pages use root-absolute URLs (`/styles.css`), so preview through the HTTP server rather than opening files directly.
