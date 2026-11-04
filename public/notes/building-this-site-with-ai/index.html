@@ -41,7 +41,7 @@
     "product-management",
     "web"
   ],
-  "wordCount": 894,
+  "wordCount": 873,
   "author": {
     "@type": "Person",
     "name": "Nicolas Kleovoulou",
@@ -70,41 +70,10 @@
         </section>
         <div class="section detail-copy note-body">
 <p>This website was built with AI coding assistants. OpenAI Codex did most of the early implementation, and Claude Code built the section you are reading now.</p>
-<p>&ldquo;I built it with AI&rdquo; can sound like &ldquo;I pressed a button and a website appeared&rdquo;. That is not what happened, and it is not the interesting part. The interesting part is that working with an AI engineer feels a lot like working with a fast, talented, slightly overconfident team member. The skills that made it work were the ones I use every day as a project lead.</p>
-<h2 id="who-did-what">Who did what</h2>
-<table>
-<thead>
-<tr>
-<th>I was responsible for</th>
-<th>The AI assistants were responsible for</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>What the site is for and who it is for</td>
-<td>Writing the HTML, CSS, JavaScript and Python</td>
-</tr>
-<tr>
-<td>Constraints: plain HTML, no framework, accessible, light and dark themes</td>
-<td>Proposing ways to meet those constraints</td>
-</tr>
-<tr>
-<td>Choosing between options and saying no</td>
-<td>Implementing the option I chose</td>
-</tr>
-<tr>
-<td>Branding: the purple palette, the origami elephant, Adobe typography</td>
-<td>Wiring assets and fonts into every page</td>
-</tr>
-<tr>
-<td>Reviewing each change before it went live</td>
-<td>Tests, checks and documentation</td>
-</tr>
-</tbody>
-</table>
-<p>That split is deliberate. I am moving into technical project and product management, and this is the job: own the <em>what</em> and the <em>why</em>, understand the <em>how</em> well enough to challenge it, and make sure nothing ships that hasn&rsquo;t been checked.</p>
+<p>“I built it with AI” can sound like &ldquo;I am good in prompting&rdquo; or prompt engineering - whatever you want to call it.  That is not what happened, and it is not the interesting part. I like to say that I worked with a tool that provides me with the time efficiencies and the skillset needed, because I cannot afford, neither the time necessary to master skills in one of the billion languages out there, nor the budget to hire a tech team t develop a website for me. The skills that made it work were the ones I use every day as a project lead.</p>
 <h2 id="how-the-site-came-together">How the site came together</h2>
-<p>The first version went live in early October 2026: a simple homepage, Firebase Hosting, and automatic preview deployments for every change. The Lab came next, a home for my projects and experiments, followed by dedicated pages for each project.</p>
+<p>The very first draft - which was never published - was done using OpenAI&rsquo;s GPTSites feature. Using this feature, I used a well structured, simple, prompt and the result was a similarly simple, static homepage with basic information about what the website is, who I am and what I do.</p>
+<p>A simple web inspector revealed a <strong>gigantic</strong> html document with inline CSS and Javascript meshed into it. GPTSites was given the freedom to decide on styling and  I utilised Firebase Hosting, and automatic preview deployments for every change. The Lab came next, a home for my projects and experiments, followed by dedicated pages for each project.</p>
 <p>At the end of October I did a larger refresh: a new palette, the origami elephant logo prepared with Adobe tools, Adobe Fonts for typography, and an interactive simulation of an n8n news workflow. The DevFest Cyprus case study and a page for my personal n8n automations followed in November.</p>
 <p>Every change went through the same loop. I described the outcome, the AI proposed and built it on a separate branch, Firebase published a private preview, and I reviewed it before merging. Nothing reached the live site without that last step.</p>
 <h2 id="the-bug-that-taught-me-the-most">The bug that taught me the most</h2>

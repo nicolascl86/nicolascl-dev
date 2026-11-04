@@ -7,23 +7,13 @@ tags: [ai, product-management, web]
 
 This website was built with AI coding assistants. OpenAI Codex did most of the early implementation, and Claude Code built the section you are reading now.
 
-"I built it with AI" can sound like "I pressed a button and a website appeared". That is not what happened, and it is not the interesting part. The interesting part is that working with an AI engineer feels a lot like working with a fast, talented, slightly overconfident team member. The skills that made it work were the ones I use every day as a project lead.
-
-## Who did what
-
-| I was responsible for | The AI assistants were responsible for |
-|---|---|
-| What the site is for and who it is for | Writing the HTML, CSS, JavaScript and Python |
-| Constraints: plain HTML, no framework, accessible, light and dark themes | Proposing ways to meet those constraints |
-| Choosing between options and saying no | Implementing the option I chose |
-| Branding: the purple palette, the origami elephant, Adobe typography | Wiring assets and fonts into every page |
-| Reviewing each change before it went live | Tests, checks and documentation |
-
-That split is deliberate. I am moving into technical project and product management, and this is the job: own the *what* and the *why*, understand the *how* well enough to challenge it, and make sure nothing ships that hasn't been checked.
+“I built it with AI” can sound like "I am good in prompting" or prompt engineering - whatever you want to call it.  That is not what happened, and it is not the interesting part. I like to say that I worked with a tool that provides me with the time efficiencies and the skillset needed, because I cannot afford, neither the time necessary to master skills in one of the billion languages out there, nor the budget to hire a tech team t develop a website for me. The skills that made it work were the ones I use every day as a project lead.
 
 ## How the site came together
 
-The first version went live in early October 2026: a simple homepage, Firebase Hosting, and automatic preview deployments for every change. The Lab came next, a home for my projects and experiments, followed by dedicated pages for each project.
+The very first draft - which was never published - was done using OpenAI's GPTSites feature. Using this feature, I used a well structured, simple, prompt and the result was a similarly simple, static homepage with basic information about what the website is, who I am and what I do.
+
+A simple web inspector revealed a **gigantic** html document with inline CSS and Javascript meshed into it. GPTSites was given the freedom to decide on styling and  I utilised Firebase Hosting, and automatic preview deployments for every change. The Lab came next, a home for my projects and experiments, followed by dedicated pages for each project.
 
 At the end of October I did a larger refresh: a new palette, the origami elephant logo prepared with Adobe tools, Adobe Fonts for typography, and an interactive simulation of an n8n news workflow. The DevFest Cyprus case study and a page for my personal n8n automations followed in November.
 
