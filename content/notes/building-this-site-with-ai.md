@@ -1,51 +1,42 @@
 ---
-title: I built this site with AI coding assistants. Here's what my job actually was.
+title: The making of this website
 date: 2026-11-03
-summary: How I used OpenAI Codex and Claude Code to build nicolascl.dev and this Field Notes section, and why the work that mattered most was defining, deciding and reviewing.
+summary: A Computer Science A Level, two degrees in Biology and a decade of impostor syndrome later, I built nicolascl.dev with Codex, Claude Code and Adobe Creative Cloud as my team.
 tags: [ai, product-management, web]
 ---
 
-This website was built with AI coding assistants. OpenAI Codex did most of the early implementation, and Claude Code built the section you are reading now.
+Programming, coding and I have a classic love-hate relationship.
 
-“I built it with AI” can sound like "I am good in prompting" or prompt engineering - whatever you want to call it.  That is not what happened, and it is not the interesting part. I like to say that I worked with a tool that provides me with the time efficiencies and the skillset needed, because I cannot afford, neither the time necessary to master skills in one of the billion languages out there, nor the budget to hire a tech team t develop a website for me. The skills that made it work were the ones I use every day as a project lead.
+While still at school, I took Computer Science GCE A Level - ***yes I am this old*** - and I was infatuated by the subject. I spent hours and hours on *Microsoft Access* creating my DVD Club project. When my teacher called me with my grade, she said that I got a straight A and also that I came first in Cyprus that year. She told me I should consider pursuing a degree in computer science. So I did the right thing for an 18-year-old. I ignored her advice and studied something that would provide me with much more lucrative employment opportunities. ***Biology***. The programming itch came back soon after I finished my master's degree. You guessed it. Also in Biology. I was convinced this was my calling. Throughout the years I learned a lot in my free time. I learned alone, typing away on my keyboard, but I also suffered from impostor syndrome, and so I have nothing to show for it. This website is the first project allowed outside my personal web browser.
 
 ## How the site came together
 
-The very first draft - which was never published - was done using OpenAI's GPTSites feature. Using this feature, I used a well structured, simple, prompt and the result was a similarly simple, static homepage with basic information about what the website is, who I am and what I do.
+“I built my website with AI” can sound like “I am good at prompting” or prompt engineering - whatever you want to call it. I prefer, however, to describe it like this:
 
-A simple web inspector revealed a **gigantic** html document with inline CSS and Javascript meshed into it. GPTSites was given the freedom to decide on styling and  I utilised Firebase Hosting, and automatic preview deployments for every change. The Lab came next, a home for my projects and experiments, followed by dedicated pages for each project.
+As a project manager, I work with a couple of tools, camouflaged as professionals in their fields. The tools are Codex and Claude Code, acting as my engineers. I act as the product manager, and I also act as the lead UI/UX designer. I also have a senior designer on my team. Her name is Adobe Creative Cloud. The skills that made it work were the ones I use every day as a project lead.
 
-At the end of October I did a larger refresh: a new palette, the origami elephant logo prepared with Adobe tools, Adobe Fonts for typography, and an interactive simulation of an n8n news workflow. The DevFest Cyprus case study and a page for my personal n8n automations followed in November.
+The very first draft - which was never published - was done using OpenAI's GPTSites feature. I used a well-structured, simple prompt, and the result was a similarly simple, static homepage with basic information about what the website is, who I am and what I do.
 
-Every change went through the same loop. I described the outcome, the AI proposed and built it on a separate branch, Firebase published a private preview, and I reviewed it before merging. Nothing reached the live site without that last step.
+Following the first team sprint, a simple web inspector revealed a **gigantic** HTML soup document with inline CSS and JavaScript. GPTSites was given the freedom to decide on styling, colour palettes and fonts. As you will see from the screenshot below, styling is not GPTSites' strongest skill. I have no idea what chain of thought led it to believe that military-style branding was the way to go.
 
-## The bug that taught me the most
+![The first GPTSites draft of nicolascl.dev: an olive and khaki homepage with my name in large dark lettering](/assets/GPTSites.png)
 
-After the logo release, a screenshot of the live site showed the elephant stacked awkwardly on the page. The code was correct, so the problem had to be elsewhere.
+Using what little coding skill I have, I went down a rabbit hole, creating three separate files out of the soup: an HTML, a CSS and a JS file. It was a hideous process, as you can imagine. But from then on I had full visibility of what was behind a website initially created with a single prompt, and I was able to get more involved in the programming parts of the project with Codex and Claude Code. They can confirm that I am **NOT** a micromanager.
 
-The cause was caching. Browsers and hosting providers keep copies of files like stylesheets to make sites load faster. The live site was serving new HTML alongside an *old* stylesheet, and the two didn't match. We confirmed it by deliberately recreating the broken combination locally, which is a far better approach than guessing.
+## The Random Google Developer Course
 
-The fix was to give every stylesheet, script and image a fingerprint in its URL, generated from its content. When a file changes, its fingerprint changes, and browsers fetch the new version. We also added an automated check that blocks deployment if any fingerprint is out of date.
+You will see in upcoming posts that I am a volunteer for an amazing bunch of people at the [Google Developer Group Cyprus](https://gdg.community.dev/gdg-cyprus/). Check us out. We spent the month of October preparing for GDG Cyprus DevFest 2026, which took place on October 31st, 2026. The impostor syndrome kicked in again, and I found myself taking random courses because all the other volunteers are obviously developers. [Grounded Agents with Firebase SQL Connect](https://developers.google.com/solutions/learn/data-connect-grounded-agents) was the course of choice. Don't ask me why.
 
-The lesson wasn't really about caching. It was that "it works on my machine" is not a definition of done. Verification has to be part of the process, not an afterthought, and that applies just as much to an ERP migration as to a personal website.
+Nevertheless, finishing that course introduced me to a number of technologies, including Firebase, Firebase SQL Connect, Vertex AI and Next.js. One of them made this website possible: Firebase Hosting is what I use to host it. I am also using one of the thousands of domains I bought and immediately parked during my programming-itch years, for no reason at all. That would be [nicolascl.dev](https://nicolascl.dev).
 
-## Building Field Notes
+## Git, GitHub and a Pipeline I Didn't Know I Had
 
-For this section I tried something I would do with any vendor or team: I asked for options before any work started. The AI looked at the site's structure and came back with four approaches, from hand-written pages to adopting a full static site framework to using a hosted platform like Substack.
+What kind of biologist pretending to understand code wouldn't use Git and GitHub? I learned both years ago and never used them. It turns out I already knew the idea, just under a different name.
 
-I chose the option that fit what already existed: I write posts in Markdown, and a small Python script turns them into pages that match the rest of the site. It also produces the RSS feed, the reading time on each post, and the "latest note" card on the homepage.
+In pharma, every controlled document has a version history and an audit trail: who changed what, when and why. Git does the same. But for code. GitHub is where that history lives, and where every change is proposed and reviewed before it is accepted. And good luck finding pull request number 10 when you are on pull request number five thousand.
 
-A few decisions I'm glad I made early:
+The second part took me longer to understand. Every time Codex or Claude Code implements a change after a heated back and forth (remember, I am the product manager), the site checks it automatically and Firebase publishes a private preview for me to review. Nothing goes live until I approve it. Developers call this CI/CD: continuous integration and continuous delivery. In my world, it is change control with a QC release, and I had been running one for weeks without knowing its name.
 
-- **Privacy-friendly analytics.** I'm based in Cyprus, so GDPR applies. Instead of tools that need a cookie banner, the site uses GoatCounter, which counts visits without cookies.
-- **Tags now, tag pages later.** Every post carries tags from day one, but clickable tag pages wait until there are enough posts to make them useful. One post per tag page would make the site look emptier, not richer.
-- **Shareable by design.** Each post has proper link previews for LinkedIn and messaging apps, a sitemap for search engines, and plain share links without tracking scripts.
+This post went through exactly that process. You are reading the version that passed. I hope you enjoyed it. Look out for the next ones.
 
-## What transfers to my day job
-
-- **Constraints are the spec.** The more precisely I described what I wanted, and what I didn't, the better the result. Vague requests produce confident, plausible, wrong answers.
-- **Ask for options first.** Asking "what are my choices?" before "build it" kept me in the decision-maker's seat.
-- **Review everything.** AI assistants are fast and articulate, and that makes it easy to accept their output without checking it. Reviewing it is the job.
-- **Understand enough to challenge.** I don't need to write every line, but I do need to know why a cache breaks a page or why a build step exists. That's what lets me ask the right questions.
-
-This section is where I'll write about what I learn, at work and on projects like this one. If you want to follow along, the [RSS feed](/feed.xml) is the easiest way for now. An email newsletter will come later.
+Nicolas Cl
