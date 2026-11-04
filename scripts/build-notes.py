@@ -47,6 +47,8 @@ CARD_START, CARD_END = '<!-- latest-note:start -->', '<!-- latest-note:end -->'
 REQUIRED = ('title', 'date', 'summary')
 # Hand-written pages that are not part of the public site map.
 SITEMAP_EXCLUDE = {'404.html'}
+# Search-engine ownership files (e.g. Google Search Console's google<id>.html).
+VERIFICATION_FILE = re.compile(r'^google[0-9a-f]+\.html$')
 
 
 class NoteError(Exception):
@@ -287,7 +289,8 @@ def absolute_links(body_html):
 
 
 def sitemap(root, notes):
-    pages = sorted(p.name for p in root.glob('*.html') if p.name not in SITEMAP_EXCLUDE)
+    pages = sorted(p.name for p in root.glob('*.html')
+                   if p.name not in SITEMAP_EXCLUDE and not VERIFICATION_FILE.match(p.name))
     urls = [(SITE_URL + '/' if name == 'index.html' else f'{SITE_URL}/{name}', None) for name in pages]
     urls.append((f'{SITE_URL}/notes/', notes[0]['date'] if notes else None))
     urls += [(n['url'], n['date']) for n in notes]
