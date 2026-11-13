@@ -105,3 +105,11 @@ button:disabled { cursor:progress; opacity:.7; }
 .note-next-cards h3 { font-size:clamp(1.125rem,1.8vw,1.375rem); margin:16px 0 12px; }
 .note-next-cards p { font-size:.9375rem; margin-bottom:20px; }
 @media(max-width:900px) { .note-next-cards { grid-template-columns:1fr; max-width:520px; } }
+
+/* About page: emphasis and the career timeline. */
+.detail-copy strong { color:var(--ink); }
+.detail-copy .career-list { list-style:none; padding:0; }
+.career-list li { display:grid; grid-template-columns:8.5rem minmax(0,1fr); gap:4px 24px; padding:16px 0; border-bottom:1px solid var(--line); font-size:1.0625rem; line-height:1.6; }
+.detail-copy .career-list li + li { margin-top:0; }
+.career-dates { font-size:.875rem; line-height:1.9; font-variant-numeric:tabular-nums; }
+@media(max-width:600px) { .career-list li { grid-template-columns:1fr; } }
