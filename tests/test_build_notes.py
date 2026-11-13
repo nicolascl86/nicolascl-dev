@@ -49,6 +49,9 @@ class BuildNotes(unittest.TestCase):
         self.assertIn('3 min read', post)  # 502 words at 220 words per minute
         self.assertIn('#ai', post)
         self.assertIn('"@type": "BlogPosting"', post)
+        self.assertIn('KEEP EXPLORING', post)
+        self.assertIn('href="/about.html"', post, 'the only note points readers to About')
+        self.assertIn('class="site-nav"', post)
         self.assertIn('/thelab.css?v=', post, 'sync must version root-absolute asset URLs')
         self.assertIn('first-note', (self.root / 'notes/index.html').read_text())
         self.assertIn('https://nicolascl.dev/notes/first-note/', (self.root / 'feed.xml').read_text())

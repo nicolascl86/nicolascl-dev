@@ -7,7 +7,9 @@ body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--fo
 .page { max-width:1280px; min-height:100svh; margin:auto; padding:0 clamp(24px,6vw,80px); display:flex; flex-direction:column; }
 header { padding:28px 0; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
 .mark { font-size:1.4rem; font-weight:600; letter-spacing:-.06em; color:var(--accent-text); text-decoration:none; }
-.domain { color:var(--muted); font-size:.875rem; margin-left:auto; }
+.site-nav { display:flex; flex-wrap:wrap; gap:4px 28px; margin-left:auto; font-size:.875rem; }
+.site-nav a { padding:12px 0; color:var(--muted); text-decoration:none; }
+.site-nav a:hover,.site-nav a[aria-current="page"] { color:var(--ink); text-decoration:underline; text-decoration-thickness:2px; }
 main { flex:1; }
 .hero { padding:88px 0 80px; }
 .eyebrow,.section-title { font-size:.75rem; letter-spacing:.14em; font-weight:600; text-transform:uppercase; color:var(--accent-text); }
@@ -53,7 +55,7 @@ article p { margin:0; color:var(--muted); font-size:.9375rem; line-height:1.75; 
 .work-card:hover,.project-card:hover { border-color:var(--accent-text); box-shadow:var(--shadow); }
 .topics { font-size:clamp(1rem,2vw,1.25rem); line-height:1.9; margin:0; max-width:800px; color:var(--muted); }
 footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px 32px; border-top:1px solid var(--line); padding:24px 0 32px; font-size:.8125rem; line-height:1.6; color:var(--muted); }
-.footer-links { display:flex; gap:28px; }
+.footer-links { display:flex; flex-wrap:wrap; gap:8px 28px; }
 .back-to-top { position:fixed; bottom:20px; right:20px; z-index:5; box-shadow:var(--shadow); }
 [hidden] { display:none !important; }
 @media(prefers-reduced-motion:no-preference) {
@@ -64,7 +66,7 @@ footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px 3
  @keyframes arrive { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 }
 @media(max-width:760px) { .projects { grid-template-columns:1fr; gap:16px; } .hero { padding:64px 0; } .section { padding:32px 0 48px; } .work-top { margin-bottom:24px; } }
-@media(max-width:480px) { header { gap:12px; padding:20px 0; } .domain { font-size:.75rem; } .theme-toggle { font-size:.75rem; } .hero { padding:48px 0; } .preview-heading { padding:16px; font-size:.6rem; } .preview-label { display:none; } .preview-flow { flex-direction:column; align-items:stretch; padding:24px; } .flow-arrow { transform:rotate(90deg); align-self:center; } .preview-result { padding:16px; } .hero-preview { margin-top:32px; } .back-to-top { bottom:12px; right:12px; } }
+@media(max-width:480px) { header { gap:12px; padding:20px 0; } .theme-toggle { font-size:.75rem; } .hero { padding:48px 0; } .preview-heading { padding:16px; font-size:.6rem; } .preview-label { display:none; } .preview-flow { flex-direction:column; align-items:stretch; padding:24px; } .flow-arrow { transform:rotate(90deg); align-self:center; } .preview-result { padding:16px; } .hero-preview { margin-top:32px; } .back-to-top { bottom:12px; right:12px; } }
 
 /* The original Adobe elephant is a local, transparent brand asset. */
 .mark { display:inline-flex; align-items:center; justify-content:center; min-width:72px; min-height:51px; flex-shrink:0; border-radius:8px; }
@@ -81,3 +83,4 @@ footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px 3
 .latest-note-card h3 { font-size:clamp(1.25rem,2.4vw,1.625rem); margin:16px 0 12px; }
 .latest-note-card .card-action { padding-top:20px; }
 .latest-note-card p { color:var(--muted); font-size:.9375rem; line-height:1.75; margin:0; }
+@media(max-width:600px) { .site-nav { order:3; width:100%; margin-left:0; gap:4px 24px; } .theme-toggle { margin-left:auto; } }
