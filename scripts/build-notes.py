@@ -43,6 +43,9 @@ NOTES_DESCRIPTION = ('Field Notes by Nicolas Kleovoulou: what I am learning acro
                      'AI, automation and technology, written up as I go.')
 DEFAULT_IMAGE = SITE_URL + '/assets/og-default.png'
 WORDS_PER_MINUTE = 220
+# Where readers sign up for new notes by email (for example a Buttondown page,
+# https://buttondown.com/<name>). Leave empty to offer the RSS feed instead.
+SUBSCRIBE_URL = ''
 CARD_START, CARD_END = '<!-- latest-note:start -->', '<!-- latest-note:end -->'
 REQUIRED = ('title', 'date', 'summary')
 # Hand-written pages that are not part of the public site map.
@@ -132,7 +135,7 @@ def meta_line(note):
             f'<span>{note["minutes"]} min read</span>')
 
 
-def page(*, title, description, url, og_type, image, body, extra_head=''):
+def page(*, title, description, url, og_type, image, body, extra_head='', notes_current=''):
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -160,13 +163,13 @@ def page(*, title, description, url, og_type, image, body, extra_head=''):
 {extra_head}</head>
 <body class="project-detail notes-page">
   <div class="page">
-    <header><a class="mark" href="/" aria-label="Nicolas Kleovoulou — homepage"><img src="/assets/elephant-logo.png" width="72" height="51" alt="Purple and grey origami elephant"></a><span class="domain">nicolascl.dev</span></header>
+    <header><a class="mark" href="/" aria-label="Nicolas Kleovoulou — homepage"><img src="/assets/elephant-logo.png" width="72" height="51" alt="Purple and grey origami elephant"></a><nav class="site-nav" aria-label="Site"><a href="/thelab.html">The Lab</a><a href="/notes/"{notes_current}>Field Notes</a><a href="/about.html">About</a></nav></header>
     <main>
 {body}
     </main>
     <footer>
       <span>Nicolas Kleovoulou</span>
-      <div class="footer-links"><a href="/notes/">Field Notes</a><a href="/feed.xml">RSS</a><a href="https://www.linkedin.com/in/nkleovoulou">LinkedIn</a><a href="https://github.com/nicolascl86">GitHub</a></div>
+      <div class="footer-links"><a href="/notes/">Field Notes</a><a href="/about.html">About</a><a href="/feed.xml">RSS</a><a href="https://www.linkedin.com/in/nkleovoulou">LinkedIn</a><a href="https://github.com/nicolascl86">GitHub</a></div>
       <span>© 2026</span>
     </footer>
   </div>
@@ -200,7 +203,8 @@ def listing_page(notes):
         {listing}
       </section>'''
     return page(title=f'{NOTES_TITLE} — {SITE_NAME}', description=NOTES_DESCRIPTION,
-                url=f'{SITE_URL}/notes/', og_type='website', image=DEFAULT_IMAGE, body=body)
+                url=f'{SITE_URL}/notes/', og_type='website', image=DEFAULT_IMAGE, body=body,
+                notes_current=' aria-current="page"')
 
 
 def share_links(note):
@@ -213,6 +217,36 @@ def share_links(note):
     ]
     return ''.join(f'<a href="{href}" rel="noopener" target="_blank">{label}</a>' if label != 'Email'
                    else f'<a href="{href}">{label}</a>' for label, href in links)
+
+
+def next_steps(older):
+    """Three ways to keep going after a note, so the page does not end at the last paragraph."""
+    def card(href, meta, title, text, action):
+        return (f'<li><a class="project-card" href="{href}"><span class="card-meta">{meta}</span>'
+                f'<h3>{title}</h3><p>{text}</p>'
+                f'<span class="card-action">{action} <span aria-hidden="true">→</span></span></a></li>')
+    if SUBSCRIBE_URL:
+        subscribe = card(esc(SUBSCRIBE_URL), 'Stay in the loop', 'Get the next note by email',
+                         'One email when a new Field Note is published. Nothing else.', 'Subscribe')
+    else:
+        subscribe = card('/feed.xml', 'Stay in the loop', 'Follow Field Notes',
+                         'New notes arrive in the RSS feed as soon as they are published.', 'Subscribe via RSS')
+    if older:
+        read_next = card(f'/notes/{older["slug"]}/', 'Read next', esc(older['title']), esc(older['summary']), 'Read the note')
+    else:
+        read_next = card('/about.html', 'Who wrote this', 'About Nicolas',
+                         'A project leader in Cyprus, building the technical things he used to only manage.', 'Read more')
+    demo = card('/n8n-ai-news-workflow.html#workflow-demo', 'Try it yourself', 'Run a workflow',
+                'An interactive walk through one of my n8n automations: collect, de-duplicate, summarise, deliver.',
+                'Open the demo')
+    return f'''<aside class="section note-next" aria-labelledby="note-next-title">
+          <h2 class="section-title" id="note-next-title">KEEP EXPLORING</h2>
+          <ul class="project-cards note-next-cards">
+            {demo}
+            {read_next}
+            {subscribe}
+          </ul>
+        </aside>'''
 
 
 def post_page(note, newer, older):
@@ -245,6 +279,7 @@ def post_page(note, newer, older):
         <div class="section detail-copy note-body">
 {note["html"]}
         </div>
+        {next_steps(older)}
         <aside class="section note-share" aria-label="Share this note">
           <h2 class="section-title">SHARE THIS NOTE</h2>
           <div class="footer-links">{share_links(note)}<a href="/feed.xml">RSS</a></div>

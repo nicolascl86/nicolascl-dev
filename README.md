@@ -8,6 +8,8 @@ Nicolas Kleovoulou’s portfolio across operations, digital transformation, AI a
 - The user’s side-profile origami elephant reference, recoloured in the brand palette, used as the linked header mark and browser favicon.
 - Shared theme control on all six content pages. Follows the system preference until a choice is saved; existing theme preferences are retained.
 - Clickable homepage work cards and a direct route to the workflow demo.
+- Site navigation in every header (The Lab, Field Notes, About) and an About page (`about.html`) with contact routes.
+- Every Field Note ends with a “Keep exploring” block: the workflow demo, the next note (or About when there is none) and a subscribe card. Set `SUBSCRIBE_URL` in `scripts/build-notes.py` to switch that card from RSS to an email sign-up page.
 - Interactive n8n news workflow simulation: collect four fictional articles, remove one duplicate, inspect three prepared summaries, and build a sample digest.
 - Run, reset, replay, and individual stage inspection. The simulation uses prepared local content and makes no external requests or claims about actual n8n execution or project results.
 - Native navigation, keyboard focus indicators, restrained hover/entrance effects, reduced-motion support, and back-to-top controls.
