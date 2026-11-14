@@ -9,6 +9,28 @@
   counter.dataset.goatcounter = `https://${GOATCOUNTER_CODE}.goatcounter.com/count`;
   counter.src = 'https://gc.zgo.at/count.js';
   document.head.append(counter);
+  // Click events show up in GoatCounter as paths named below, e.g. "outbound/linkedin.com".
+  // The page the click came from goes in the event title.
+  const eventName = link => {
+    const href = link.getAttribute('href') || '';
+    if (href.startsWith('mailto:')) return href.startsWith('mailto:?') ? 'share/email' : 'contact/email';
+    let url;
+    try { url = new URL(href, location.href); } catch { return null; }
+    if (url.hostname !== location.hostname) {
+      const host = url.hostname.replace(/^www\./, '');
+      if (/share|intent/.test(url.pathname)) return `share/${host}`;
+      return `outbound/${host}`;
+    }
+    if (url.pathname.endsWith('/feed.xml')) return 'subscribe/rss';
+    if (url.hash === '#workflow-demo') return 'cta/workflow-demo';
+    return null;
+  };
+  document.addEventListener('click', event => {
+    const link = event.target.closest && event.target.closest('a[href]');
+    const name = link && eventName(link);
+    if (!name || !window.goatcounter || typeof window.goatcounter.count !== 'function') return;
+    window.goatcounter.count({ path: name, title: `from ${location.pathname}`, event: true });
+  });
 })();
 // Shared progressive enhancements for every page.
 (() => {
