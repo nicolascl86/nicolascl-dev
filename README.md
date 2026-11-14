@@ -117,6 +117,10 @@ Field Notes is the site's writing section, served at `/notes/`. Posts are writte
 1. Sign up at https://www.goatcounter.com with the code `nicolascl` (if taken, choose another and update `GOATCOUNTER_CODE`).
 2. Merge and deploy, then visit the live site; the visit appears in the dashboard.
 
+Link clicks are also counted as GoatCounter events, with no markup needed: `outbound/<host>` (e.g. LinkedIn, GitHub), `share/<host>` and `share/email` (note share links), `contact/email`, `subscribe/rss` and `cta/workflow-demo`. The event title records the page the click came from. Tag links you share elsewhere with UTM parameters (e.g. `?utm_source=linkedin&utm_campaign=<note-slug>`) so they appear under Campaigns.
+
+**Link previews.** Every hand-written page has a canonical URL, Open Graph and Twitter card tags; new pages should copy that block from an existing page. The homepage carries `WebSite` + `Person` structured data.
+
 **Search Console.** Add `nicolascl.dev` as a Domain property at https://search.google.com/search-console, verify it with the DNS TXT record Google provides at your domain registrar, then submit `https://nicolascl.dev/sitemap.xml`.
 
 Local preview serves posts at `http://localhost:8000/notes/`. Notes pages use root-absolute URLs (`/styles.css`), so preview through the HTTP server rather than opening files directly.
