@@ -29,7 +29,7 @@ class BuildNotes(unittest.TestCase):
         for image in ('favicon.png', 'elephant-logo.png'):
             (root / 'assets' / image).write_bytes(b'image fixture')
         (root / 'styles.css').write_text('body {}\n')
-        (root / 'thelab.css').write_text('@import url("styles.css");\n')
+        (root / 'pages.css').write_text('@import url("styles.css");\n')
         (root / 'script.js').write_text('/* ui */\n')
         (root / 'index.html').write_text('<link href="styles.css"><!-- latest-note:start --><!-- latest-note:end -->')
         (root / 'content/notes/first-note.md').write_text(POST)
@@ -52,7 +52,7 @@ class BuildNotes(unittest.TestCase):
         self.assertIn('KEEP EXPLORING', post)
         self.assertIn('href="/about.html"', post, 'the only note points readers to About')
         self.assertIn('class="site-nav"', post)
-        self.assertIn('/thelab.css?v=', post, 'sync must version root-absolute asset URLs')
+        self.assertIn('/pages.css?v=', post, 'sync must version root-absolute asset URLs')
         self.assertIn('first-note', (self.root / 'notes/index.html').read_text())
         self.assertIn('https://nicolascl.dev/notes/first-note/', (self.root / 'feed.xml').read_text())
         self.assertIn('https://nicolascl.dev/notes/first-note/', (self.root / 'sitemap.xml').read_text())

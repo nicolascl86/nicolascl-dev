@@ -158,7 +158,7 @@ def page(*, title, description, url, og_type, image, body, extra_head='', notes_
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon.png">
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
   <link rel="stylesheet" href="https://use.typekit.net/dea3jlm.css">
-  <link rel="stylesheet" href="/thelab.css">
+  <link rel="stylesheet" href="/pages.css">
   <script src="/script.js" defer></script>
 {extra_head}</head>
 <body class="project-detail notes-page">

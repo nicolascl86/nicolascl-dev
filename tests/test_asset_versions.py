@@ -17,9 +17,9 @@ class AssetVersions(unittest.TestCase):
             (root / 'assets').mkdir()
             shutil.copy2(SCRIPT, root / 'scripts' / SCRIPT.name)
             (root / 'styles.css').write_text('body { color: #cdc8d3; }\n')
-            (root / 'thelab.css').write_text('@import url("styles.css");\n')
+            (root / 'pages.css').write_text('@import url("styles.css");\n')
             (root / 'script.js').write_text('/* shared UI */\n')
-            page = '<img src="assets/logo.png"><link href="https://use.typekit.net/dea3jlm.css"><link href="thelab.css"><script src="script.js"></script>'
+            page = '<img src="assets/logo.png"><link href="https://use.typekit.net/dea3jlm.css"><link href="pages.css"><script src="script.js"></script>'
             (root / 'index.html').write_text(page)
             (root / 'assets' / 'logo.png').write_bytes(b'brand asset fixture')
             command = [sys.executable, str(root / 'scripts' / SCRIPT.name)]
@@ -28,8 +28,8 @@ class AssetVersions(unittest.TestCase):
             self.assertEqual(run().returncode, 0)
             self.assertEqual(run('--check').returncode, 0)
             before = (root / 'index.html').read_text()
-            imported = (root / 'thelab.css').read_text()
-            self.assertIn('thelab.css?v=', before)
+            imported = (root / 'pages.css').read_text()
+            self.assertIn('pages.css?v=', before)
             self.assertIn('script.js?v=', before)
             self.assertIn('assets/logo.png?v=', before)
             self.assertIn('styles.css?v=', imported)
@@ -40,7 +40,7 @@ class AssetVersions(unittest.TestCase):
             self.assertNotEqual(run('--check').returncode, 0)
             self.assertEqual(run().returncode, 0)
             self.assertNotEqual(before, (root / 'index.html').read_text())
-            self.assertNotEqual(imported, (root / 'thelab.css').read_text())
+            self.assertNotEqual(imported, (root / 'pages.css').read_text())
             self.assertEqual(run('--check').returncode, 0)
             after = (root / 'index.html').read_bytes()
             self.assertEqual(run().returncode, 0)
@@ -51,7 +51,7 @@ class AssetVersions(unittest.TestCase):
             self.assertEqual(run().returncode, 0)
             self.assertNotEqual(after, (root / 'index.html').read_bytes())
             # CI catches a stale deployed copy even with correct source versions.
-            (root / 'public' / 'thelab.css').write_text(imported)
+            (root / 'public' / 'pages.css').write_text(imported)
             self.assertNotEqual(run('--check').returncode, 0)
 
 if __name__ == '__main__':

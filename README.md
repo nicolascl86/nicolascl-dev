@@ -25,7 +25,7 @@ Open http://localhost:8000. The homepage is `index.html`; the interactive exampl
 
 ## Source of truth
 
-Edit the HTML, CSS and JavaScript files at the repository root, and brand files in `assets/`. `styles.css` and `script.js` are shared by every content page. `thelab.css` imports those base styles and adds Lab/project styles; `thelab.js` handles native fragment focus. `workflow-demo.js` is loaded only by the news project.
+Edit the HTML, CSS and JavaScript files at the repository root, and brand files in `assets/`. `styles.css` and `script.js` are shared by every content page. `pages.css` imports those base styles and adds the styles shared by every inner page (The Lab, project pages, About and Field Notes); `thelab.js` handles native fragment focus. `workflow-demo.js` is loaded only by the news project.
 
 Firebase serves the generated copies in `public/`. After editing root sources or posts:
 
